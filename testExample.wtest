@@ -1,0 +1,42 @@
+import profesionales.* 
+import universidad.* 
+import empresas.*
+
+describe "Test de la etapa 1"{
+
+  const sanMartin = new Universidad(provinciaActual = "Buenos Aires", honorariosRecomendados= 3500)
+  const rosario = new Universidad(provinciaActual = "Santa Fe", honorariosRecomendados= 2800) 
+  const corrientes = new Universidad(provinciaActual = "Corrientes", honorariosRecomendados = 4200) 
+  const hurlingham = new Universidad(provinciaActual = "Buenos Aires", honorariosRecomendados = 8800) 
+
+  const juana = new ProfesionalVinculado(universidad = rosario) 
+  const melina = new ProfesionalDelLitoral(universidad = corrientes) 
+  const rocio = new ProfesionalLibre(universidad = hurlingham, honorariosPorHora = 5000, 
+                                       provinciasDondePuedeTrabajar = #{"Santa Fe", "Cordoba", "Buenos Aires"}) 
+  const luciana = new ProfesionalLibre(universidad = rosario, honorariosPorHora = 3200, 
+                                       provinciasDondePuedeTrabajar = #{"Sante Fe", "Entre Rios"} ) 
+
+  const empresa = new EmpresaDeServicio(honorarioDeReferencia = 3500) 
+
+  method initialize(){ 
+    empresa.contratar(juana) 
+    empresa.contratar(melina)  
+    empresa.contratar(rocio) 
+    empresa.contratar(luciana)    
+  }
+
+
+
+  test "dos estudiaron en Rosario, uno en Hurlingham, ninguno en San Martín."{
+    assert.equals(2, empresa.profesionalesQueEstudiaronEn(rosario))
+    assert.equals(1, empresa.profesionalesQueEstudiaronEn(hurlingham)) 
+    assert.equals(0, empresa.profesionalesQueEstudiaronEn(sanMartin))
+
+  } 
+  test"Tiene como profesional caro solo a Rocio"{
+    assert.equals([rocio], empresa.profesionalesCaros())
+  }
+  test"Tiene como universidades formadoras a las de Rosario, Corrientes y Hurlingham"{
+    assert.equals(#{rosario, corrientes, hurlingham}, empresa.universidadesFormadoras())
+  }
+}

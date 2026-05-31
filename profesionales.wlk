@@ -1,6 +1,6 @@
 import universidad.* 
 
-class ProfesionalesVinculados{ 
+class ProfesionalVinculado{ 
     var universidad 
 
     method universidad() = universidad 
@@ -15,7 +15,7 @@ class ProfesionalesVinculados{
 
 } 
 
-class ProfesionalesDelLitoral{
+class ProfesionalDelLitoral{
     var universidad 
 
     method universidad() = universidad 
@@ -26,7 +26,7 @@ class ProfesionalesDelLitoral{
     }   
 }
 
-class ProfesionalesLibres{
+class ProfesionalLibre{
     var universidad 
     var honorariosPorHora 
     var provinciasDondePuedeTrabajar = #{}
